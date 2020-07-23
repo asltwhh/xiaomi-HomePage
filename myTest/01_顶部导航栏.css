@@ -1,0 +1,145 @@
+li {
+	list-style:none;
+}
+a {
+	text-decoration: none;
+}
+.w {
+	width: 1226px;
+	margin: 0 auto;
+}
+.top-wrapper {
+	width: 100%;
+	height: 45px;
+	background-color: #333333;
+	line-height: 45px;
+}
+.top-wrapper .left-nav,
+.top-wrapper .right-nav,
+.top-wrapper li {
+	float: left;
+}
+.top-wrapper .shopping-car {
+	float: right;
+}
+.top-wrapper a,
+.top-wrapper li {
+	color: #B0B0B0;
+	font-size: 12px;
+}
+.top a:hover {
+	color: white;
+}
+
+
+/*设置左侧导航栏*/
+.top .left-nav a {
+	display: block;
+	height: 45px;
+}
+.top .left-nav .line {
+	margin: 0 8px;
+	color: #3C423C;
+}
+.top .left-nav a:hover {
+	color: white;
+}
+
+/*设置右侧导航栏*/
+.top .right-nav {
+	margin-left: 200px;
+}
+.top .right-nav .line {
+	margin: 0 8px;
+}
+
+/*设置购物车*/
+.shopping-car a {
+	display: block;
+	width: 120px;
+	height: 45px;
+	background-color: #424242;
+	text-align: center;
+}
+.shopping-car a i {
+	margin-right: 5px;
+}
+.shopping-car a:hover {
+	background-color: white;
+	color: #FF5B00;
+}
+
+
+/*设置左侧导航栏下载APP的下拉层*/
+.qrcode-wrapper {
+	/*background-color: red;*/
+	position: relative;
+}
+.left-nav .qrcode {
+	height: 0;
+	overflow: hidden;
+	position: absolute;
+	width: 124px;
+	/*height: 150px;*/
+	line-height: 1;
+	text-align: center;
+	font-size: 14px;
+	/*background-color: green;*/
+	transition: height 0.3s;
+	color: black;
+	box-shadow: 0 0 10px rgba(0,0,0,.3);
+	left: -40px;
+	z-index: 9999999;
+	background-color: white;
+}
+
+.left-nav .qrcode img {
+	width: 88px;
+	height: 88px;
+	display: block;
+	padding: 21px 18px 10px 18px;
+	/*background-color: red;*/
+}
+.left-nav .qrcode-wrapper:hover .qrcode{
+	height: 150px;
+}
+
+/*设置小三角*/
+.left-nav .trangle {
+	width: 0;
+	height: 0;
+	border: 8px solid transparent;
+	border-bottom-color: white;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	display: none;
+}
+
+.left-nav .qrcode-wrapper:hover .trangle{
+	display: block;
+}
+
+/*添加购物车的下拉框*/
+.top .shopping-car {
+	position: relative;
+}
+.shopping-car .mycar {
+	width: 240px;
+	/*height: 80px;*/
+	/*background-color: red;*/
+	position: absolute;
+	right: 0;
+	top: 45px;
+	background-color: white;
+	height: 0;
+	overflow: hidden;
+	transition: height 0.3s;
+	z-index: 99999;
+}
+.shopping-car:hover .mycar {
+	height: 80px;
+	box-shadow: 0 5px 5px rgba(0,0,0,.1);
+}

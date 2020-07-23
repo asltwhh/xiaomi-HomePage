@@ -1,0 +1,116 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html>
+<head>
+	<title>过渡效果</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		/*设置外部容器的属性*/
+		.box1 {
+			width: 100px;
+			height: 40px;
+			background-color: #bfa;
+			line-height: 40px;
+		}
+		a {
+			text-decoration: none;
+		}
+		/* 设置下拉框 */
+		.box2 {
+			width: 100px;
+			/* 设置其高度为0，并且溢出内容自动隐藏，这样在打开界面时我们是看不到这个下拉框的 */
+			height: 0;
+			overflow: hidden;
+			/* 为高度设置过渡效果 */
+			transition: height 0.3s;
+			/* 为其添加定位，令其脱离文档流，不影响其它元素的分布*/
+			position: absolute;
+		}
+		.box2 img{
+			/* 设置图片的高度和宽度*/
+			height: 90px;
+			width: 90px;
+		}
+		/* 当鼠标位于box1上时，以过渡效果出现下拉框 */
+		.box1:hover .box2{
+			/* 设置下拉框的最终高度 */
+			height: 100px;
+		}
+		.box3 {
+			height: 100px;
+			width: 100px;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="box1">
+		<a href="javascript:;">
+			我是超链接
+			<div class="box2">
+				<img src="img/qrcode.png">
+			</div>
+		</a>
+	</div>
+	<p>锄禾日当午，汗滴禾下土，谁知盘中餐，粒粒皆辛苦</p>
+	<div class="box3"></div>
+</body>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+	<title>过渡效果</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		/*设置外部容器的属性*/
+		.box1 {
+			width: 100px;
+			height: 40px;
+			background-color: #bfa;
+			line-height: 40px;
+		}
+		a {
+			text-decoration: none;
+		}
+		/* 设置下拉框 */
+		.box2 {
+			width: 100px;
+			/* 设置其高度为0，并且溢出内容自动隐藏，这样在打开界面时我们是看不到这个下拉框的 */
+			height: 0;
+			overflow: hidden;
+			/* 为高度设置过渡效果 */
+			transition: height 0.3s;
+			/* 为其添加定位，令其脱离文档流，不影响其它元素的分布*/
+			position: absolute;
+		}
+		.box2 img{
+			/* 设置图片的高度和宽度*/
+			height: 90px;
+			width: 90px;
+		}
+		/* 当鼠标位于box1上时，以过渡效果出现下拉框 */
+		.box1:hover .box2{
+			/* 设置下拉框的最终高度 */
+			height: 100px;
+		}
+		.box3 {
+			height: 100px;
+			width: 100px;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="box1">
+		<a href="javascript:;">
+			我是超链接
+			<div class="box2">
+				<img src="img/qrcode.png">
+			</div>
+		</a>
+	</div>
+	<p>锄禾日当午，汗滴禾下土，谁知盘中餐，粒粒皆辛苦</p>
+	<div class="box3"></div>
+</body>
+>>>>>>> b19e42900c2100ba0803e2a30345f54cb49f68fe
+</html>

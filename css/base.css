@@ -1,0 +1,49 @@
+/*公共样式，很多的浏览器页面均具备这个样式*/
+.clearfix::before,
+.clearfix::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+/*设置网页的字体*/
+body {
+	font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+    color: #333;
+    /*窗口大小（body区）在缩小到1226时就不再缩小，出现滚动条*/
+    min-width: 1226px;
+}
+/*专门设置一个类表示中间容器的宽度*/
+.w {
+	width: 1226px;
+	margin: 0 auto;
+}
+/*去除a的下划线*/
+a {
+	text-decoration: none;
+	color: #333;
+=======
+/*公共样式，很多的浏览器页面均具备这个样式*/
+.clearfix::before,
+.clearfix::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+/*设置网页的字体*/
+body {
+	font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+    color: #333;
+    /*窗口大小（body区）在缩小到1226时就不再缩小，出现滚动条*/
+    min-width: 1226px;
+}
+/*专门设置一个类表示中间容器的宽度*/
+.w {
+	width: 1226px;
+	margin: 0 auto;
+}
+/*去除a的下划线*/
+a {
+	text-decoration: none;
+	color: #333;
+>>>>>>> b19e42900c2100ba0803e2a30345f54cb49f68fe
+}

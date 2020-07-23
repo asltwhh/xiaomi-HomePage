@@ -1,0 +1,307 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+.w {
+	width: 1226px;
+	margin: 0 auto;
+}
+li {
+	list-style:none;
+}
+a {
+	text-decoration: none;
+}
+.header-wrapper {
+	position: relative;
+}
+.header {
+	height: 100px;
+	/*内容居中*/
+	line-height: 100px;
+	line-height: 100px;
+	/*background-color: #bfa;*/
+}
+/*logo和nav向左浮动，并且nav里面的li也向左浮动*/
+.header .logo,
+.header .header-nav,
+.header .header-nav li {
+	float: left;
+}
+/*搜索栏向右浮动*/
+.header .header-search {
+	float: right;
+}
+
+/*
+1、logo部分
+*/
+.header .logo {
+	width: 55px;
+	height: 100px;
+	/*因为其中放置的两个超链接需要并排放置，但是每次只能显示一个超链接，所以需要设置溢出隐藏*/
+	overflow: hidden;
+	position: relative;
+}
+.header .logo a{
+	display: block;
+	width: 55px;
+	height: 55px;
+	/*居中*/
+	margin-top: 22.5px;
+	/*设置定位，调整两个超链接的位置，使其并排放置*/
+	position: absolute;
+	background-color: #FF6700;
+	/*设置动画演示*/
+	transition: left 0.3s;
+}
+/*为两个超链接设置各自的背景，通过调整left值实现过渡效果*/
+.header .logo .mi-logo {
+	left: 0;
+	background-image: url(../img/mi-logo.png);
+}
+.header .logo .mi-home {
+	left: -55px;
+	background-image: url(../img/home.png);
+}
+.header .logo:hover .mi-logo{
+	left: 55px;
+}
+.header .logo:hover .mi-home {
+	left: 0;
+}
+
+/*
+2、中间的nav部分
+*/
+/*.header-nav {
+	width: 828px;
+	height: 100px;
+}*/
+.header .header-nav ul {
+	/*设置与logo的边距*/
+	padding:12px 0 0 30px;
+	height: 82px;
+	/*内容居中*/
+	line-height: 82px;
+}
+.header-nav ul li a {
+	color: #333333;
+	font-size: 17px;
+	display: block;
+	height: 82px;
+	margin-right: 20px;
+}
+.header-nav li a:hover {
+	color: #FF5B00;
+}
+.header-nav .hidden {
+	/*注意只是隐藏超链接a，依然占据页面位置*/
+	visibility: hidden;
+}
+
+/*
+3、右侧搜索栏
+*/
+.header-search {
+	height: 51px;
+	width: 297px;
+	margin-top: 25px;
+}
+.header-search input,
+.header-search button {
+	/*增加浮动，去除两个表单项元素特有的间距*/
+	float: left;
+	/*去除轮廓线*/
+	outline: none;
+	height: 49px;
+	padding: 0;
+	margin: 0;
+	/*去除表单项元素自身的边框*/
+	border: 0;
+	/*为其添加边框*/
+	border: 1px #B0B0B0 solid;
+}
+.header-search input {
+	height: 47px;
+	width: 241px;
+	/*设置元素缩进*/
+	text-indent: 5px;
+	color: #757575;
+}
+.header-search button {
+	width: 53px;
+	/*去除左边框*/
+	border-left: none;
+	font-size: 16px;
+	color: #616161;
+	background-color: white;
+}
+
+.header-search button:hover {
+	background-color:#FF5B00;
+	color: white;
+	border: none;
+}
+.header-search:hover input,
+.header-search:hover button {
+	border-color: grey;
+}
+
+.header-search input:focus,
+.header-search input:focus + button{
+	/*使用+是为了选取紧跟着input的那一个兄弟元素button，如果input后面一个兄弟元素不是button，则无法选中*/
+	border-color: #FF5B00;
+}
+
+/*
+4、导航栏下拉框:在html中下拉框必须放在ul中;
+*/
+.goods-info {
+	/*设置其宽度100%，即是离他最近的开启了定位的父元素宽度的100%，那也就是整个头部的容器header-wrapper*/
+	width: 100%;
+	/*height: 120px;*/
+	background-color: white;
+	/*开启定位，确定位置*/
+	position: absolute;
+	left: 0;
+	top: 100px;
+	/*隐藏元素*/
+	height: 0;
+	overflow: hidden;
+	/*增大其层级*/
+	z-index: 9;
+	transition: height,.3s;
+	/*先设置一个透明边框，然后再之后改变其颜色时就不会产生突变*/
+	border-top: 1px solid transparent;
+}
+
+/*只给中间的几个li添加hover时的下拉框*/
+.nav .show-goods:hover ~ .goods-info,
+.goods-info:hover {
+	/*不仅需要给li绑定hover，还需要给弹出层自身绑定hover，否则在当鼠标离开了li后，弹出层就消失了*/
+	height: 228px;
+	border-top-color: rgb(224,224,224);
+	box-shadow: 0 5px 3px rgba(0,0,0,.1);
+}
+
+/*
+全部商品分类：隐藏部分
+*/
+.hidden-nav-wrapper {
+	width: 234px;
+	height: 460px;
+	background-color: #808A8C;
+	position: absolute;
+	left: 50%;
+	margin-left: -613px;
+	top: 100px;
+	z-index: 1;
+}
+.header-nav .hidden-nav-wrapper ul.hidden-nav{
+	padding:0;
+	height: 420px;
+	/*background-color: blue;*/
+	padding: 20px 0;
+}
+.header-nav .hidden-nav-wrapper ul.hidden-nav li {
+	/*前面设置了li浮动，这里去除浮动*/
+	float: none;
+	height: 42px;
+}
+.header-nav .hidden-nav-wrapper ul.hidden-nav a {
+	display: block;
+	width: 174px;
+	height: 42px;
+	line-height: 42px;
+	padding: 0 30px 0;
+	color: white;
+	font-size: 14px;
+}
+.header-nav .hidden-nav-wrapper ul.hidden-nav li i {
+	margin-left:90px;
+	font-size: 18px;
+}
+.header-nav .hidden-nav-wrapper ul.hidden-nav a:hover {
+	background-color: #FF5B00;
+	color: white;
+}
+
+/*
+banner部分
+ */
+.banner {	/*需要设置高度，否则高度塌陷了*/
+	height: 460px;
+	position: relative;
+	background-color: pink;
+}
+.banner > a{
+	display: block;
+	width: 1226px;
+	height: 460px;
+	position: absolute;
+}
+.banner a img {
+	width: 100%;
+	height: 100%;
+}
+.banner .spot {
+	position: absolute;
+	right: 32px;
+	bottom: 32px;
+}
+.banner .spot a {
+	float: left;
+	width: 7px;
+	height: 7px;
+	background-color: #535356;
+	border-radius: 50%;
+	border: 2px solid #A098B7;
+	margin-right: 5px;
+}
+.banner .spot .active,
+.banner .spot a:hover {
+	border-color: #535356;
+	background-color: #A098B7;
+}
+
+/*雪碧图*/
+.banner .pre-next a {
+	display: block;
+	width: 42px;
+	height: 69px;
+	position: absolute;
+}
+.banner .pre-next .pre {
+	left: 234px;
+	top: 195px;
+	background-image: url(../img/prev-next.png);
+	background-position: -83px 0;
+}
+.banner .pre-next .next {
+	right: 0;
+	top: 195px;
+	background-image: url(../img/prev-next.png);
+	background-position: -123px 0;
+}
+
+.banner .pre-next .pre:hover {
+	background-position: 0 0;
+}
+.banner .pre-next .next:hover {
+	background-position: -42px 0;
+}
+
+/*
+右边的小工具条
+ */
+.right-tool {
+	width: 26px;
+	height: 200px;
+	position: fixed;
+	background-color: purple;
+	right: 50%;
+	bottom: 60px;
+	margin-right: -639px;
+	z-index: 9999;
+}

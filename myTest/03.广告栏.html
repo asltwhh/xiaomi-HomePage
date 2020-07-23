@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>广告栏左侧</title>
+	<link rel="stylesheet" type="text/css" href="../css/all.css">
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="03_广告栏.css">
+	<style type="text/css">
+		
+		p {
+			white-space: pre;
+			line-height: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="ad-wrapper">
+		<div class="shortcut">
+			<li><a href="#"><i class="fas fa-clock"></i>小米秒杀</a></li>
+			<li><a href="#"><i class="fas fa-building"></i>企业团购</a></li>
+			<li><a href="#"><i class="fas fa-frog"></i>F码通道</a></li>
+			<li><a href="#"><i class="fas fa-robot"></i>米粉卡</a></li>
+			<li><a href="#"><i class="fas fa-keyboard"></i>以旧换新</a></li>
+			<li><a href="#"><i class="fas fa-sim-card"></i>话费充值</a></li>
+		</div>
+		<div class="ad-img">
+			<a href="javascript:;"><img src="../img/ad-img1.jpg"></a>
+			<a href="javascript:;"><img src="../img/ad-img2.jpg"></a>
+			<a href="javascript:;"><img src="../img/ad-img3.jpg"></a>
+		</div>
+	</div>
+	<p>
+	首先确定一个大的容器，其中包含两个div块，左边和右边，设置两个块均向左浮动，设置两个容器之间的间距
+		- 左边：
+			- 由于鼠标只有放在文字及其上面的部分时才会出现hover的性质，所以超链接的大小要控制好，另外可以使用padding将超链接的上方填充，这样上方既属于超链接的部分，又可以实现间距的设计
+			- 在设计类似于边框时，使用before和after类分别设计
+		- 右边：
+			- 由于三个图片并排放置，所以可以令其浮动，先设置超链接的宽度和高度，然后将图片的宽度设置为100%,这样图片就会充满整个父元素的大小
+			- 为右边的超链接设置右边距，然后将最后一个超链接的右边距去除，这样整体宽度才会满足整个外部容器的宽度，不会发生溢出
+	</p>
+</body>
+</html>

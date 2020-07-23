@@ -1,0 +1,1071 @@
+/*这个是我们主页index.html的样式表*/
+/*顶部导航条的容器*/
+.topbar-wrapper {
+	width: 100%;
+	background-color: #333;
+	/* 直接将高度定死，可以减少很多问题，设置高度等于行高，实现其内元素的垂直居中 */
+	line-height: 40px;
+	height: 40px;
+}
+.service,.topbar li {
+	float: left;
+}
+.shopcar,.user_info {
+	float: right;
+}
+/*设置超链接的颜色*/
+.topbar a{
+	color: #b0b0b0;
+	font-size: 12px;
+	/*因为在原版的页面中，当我们将鼠标放置在文字以外的部分时，也会有hover的效果,所以应该将其设置为块元素*/
+	display: block;
+}
+/*设置超链接移入的效果*/
+.topbar a:hover {
+	color: white;
+}
+/*设置中间的分割线*/
+.topbar .line {
+	color: #424242;
+	font-size: 12px;
+	margin: 0 8px;
+}
+/*设置购物车的样式*/
+.shopcar {
+	margin-left: 25px;
+}
+.shopcar a{
+	width: 120px;
+	background-color: #424242;
+	/*内容水平居中处理*/
+	text-align: center;
+}
+.shopcar i {
+	margin-right: 3px;
+}
+/*这里的hover必须绑定给整个ul,因为这里有一个下拉框，需要保证在鼠标移动到下拉框中时，a也保持相同的Hover状态*/
+.shopcar:hover a{
+	color: #FF5B00;
+	background-color: white;
+}
+
+/*
+做下载APP的下拉框
+*/
+.service .qrcode {
+	/*设置整个下拉框的高度和宽度，背景颜色以及阴影*/
+	width: 124px;
+	/*height: 148px;*/
+	background-color: white;
+	box-shadow: 0 0 7px rgba(0, 0, 0, .2);
+	/*此时由于div块是导航栏的子元素，所以具有line-height=40px(文字部分),
+	这时div块所有元素相加的高度(img)90+(margin-top)18+(margin-bottom)12+(文字)40=170px>148px,
+	所以会导致span内的文字超出整个div块，就需要调整行高,设置为1表示是字体大小的1倍*/
+	line-height: 1; 
+	text-align: center;
+	/*因为整个下拉框在出现时不会对页面内的其他元素产生影响(不会撑开)，所以需要
+	令其脱离文档流*/
+	position: absolute;
+	/*调整整个框的位置处于a的正下方*/
+	left: -30px;
+	/* 设置其的文档层次，大一些，因为它基本上不会被其它元素覆盖住，除非在这个div块中的元素也具备类似的下拉框 */
+	z-index: 99;
+	/*设置其在打开界面时不可见，只有当整个导航选项处于hover状态时再出现*/
+	/* 方法1：display: none;*/
+	/* 因为这里要设置过渡效果，所以使用第二种方法，令其高度为0，设置溢出内容隐藏 */
+	height: 0;
+	overflow: hidden;
+	/* 设置其高度增大的过渡效果：0.3秒高度从0增加到指定高度，指定高度在hover部分 */
+	transition: height 0.3s;
+}
+.service .qrcode img{
+	width: 90px;
+	height:90px;
+	margin: 18px 17px 12px;
+}
+.qrcode span {
+	/*  设置文字的颜色 */
+	color: #000;
+}
+.qrcode_outer {
+	/*  将宽度定死，这样在处于hover状态，较大宽度的二维码出现时，就不会撑大整个导航选项 */
+	width: 60px;
+	/* 为了调整下拉框及小三角的位置设置的 */
+	position: relative;
+}
+/* 令下拉框在整个导航选项处于hover状态时出现 */
+.qrcode_outer:hover .qrcode{
+	/*  设置其过渡效果的最终高度 */
+	height: 148px;
+}
+.qrcode_outer:hover a::after{
+ 	/* 令小三角在整个导航选项处于hover状态时出现 */
+	display: block;
+}
+
+/*
+添加APP下拉框的小三角
+*/
+.qrcode_outer a::after {
+	/* 内容设置为空，直接将其设置为一个块元素，宽度和高度均设置为0，然后利用边框产生小三角 */
+	content: '';
+	display: block;
+	width: 0;
+	height: 0;
+	/* 先令边框均为透明颜色，因为我们只需要显示下边框的部分，所以我们将下边框的颜色设置出来，上边框
+	可以去掉也可以存在，因为它的颜色是透明的，左右边框不能去掉，保持透明即可 */
+	border: 7px solid transparent;
+	border-top: none;
+	border-bottom-color: #fff;
+	/* 开启定位，调整位置 */
+	position: absolute;
+	/* 调整小三角的水平居中，那九个值加起来不满足等式，则自动调整值为auto的部分*/
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	/* 设置其在打开界面时不可见，只有当整个导航选项处于hover状态时再出现 */
+	display: none;
+}
+
+/* 
+设置购物车部分的下拉框 
+*/
+.shopcar {
+	position: relative;
+}
+.shopcar .user_buy {
+	width: 316px;
+	height: 0;
+	overflow: hidden;
+	/*阴影默认和元素大小一致，并且阴影正好被元素覆盖了，0表示阴影相对于元素的水平偏移量，8px是垂直偏移量，10px是阴影的模糊半径
+	因为原网页中，上面没有阴影，所以垂直偏移量为8px*/
+	box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+	/* 令其脱离文档流，不影响其他元素的布局 */
+	position: absolute;
+	top: 40px;
+	right: 0;
+	text-align: center;
+	z-index: 99;
+	background-color: white;
+	transition: height 0.3s;
+}
+.user_buy div {
+	/* 设置居中处理 */
+	margin-top: 31px;
+	font-size: 12px;
+	color: #424242;
+}
+.shopcar:hover .user_buy{
+	height: 102px;
+}
+
+
+
+/*
+设置中间的header
+ */
+.header-wrapper {
+	position: relative;
+	/*background-color:red;*/
+}
+.header {
+	height: 100px;
+	/*background-color:#bfa;*/
+}
+.header .logo {
+	float: left;
+	margin-top: 22.5px;
+	height: 55px;
+	width: 55px;
+	position: relative;
+	/*直接将logo的宽度和高度定为超链接的高度和宽度，然后令其溢出部分隐藏，从而使得每一次只能显示一个超链接*/
+	overflow: hidden;
+	/*隐藏logo中的文字，一般logo中的文字是给浏览器看的*/
+	text-indent: -9999px;
+}
+/*统一设置logo的超链接*/
+.header .logo a {
+	/*display: block; 由于后面有需要，为其开启了定位，所以block就不需要了*/
+	position: absolute;
+	height: 55px;
+	width: 55px;
+	background-color:#ff6700;
+	/*让a垂直居中*/
+	background-image:url(../img/mi-logo.png);
+	/*背景居中*/
+	background-position:center;
+	/*这里需要设置left:0,因为过渡效果需要从有效值到另一个有效值*/
+	left: 0;
+	transition: left 0.3s;
+}
+.header .logo .home {
+	/*设置第一个超链接的背景图片*/
+	background-image: url(../img/home.png);
+	/*这里的left值会直接替代对于所有logo中超链接的设置的left:0*/
+	left: -55px;
+}
+.header .logo:hover .mi{
+	left: 55px;
+}
+.header .logo:hover .home{
+	left: 0;
+}
+
+/*
+设置中间的导航条
+ */
+.header .nav-wrapper {
+	float: left;
+	margin-left: 7px;
+}
+.header .nav {
+	/*width: 792px;*/
+	height: 100px;
+	/*background-color: pink;*/
+	line-height: 100px;
+	padding-left: 58px;
+}
+/* 设置导航条中的列表项*/
+.nav-wrapper .nav>li {
+	float: left;
+}
+.nav-wrapper li a {
+	display: block;
+	font-size: 16px;
+	margin-right: 20px;
+}
+.all-goods {
+	/*将这一部分隐藏，但是仍然占据页面位置*/
+	visibility:hidden;
+}
+.nav-wrapper li a:hover{
+	color: #ff6700;
+}
+
+/*设置弹出层*/
+.nav .goods-info {
+	/*height: 228px;*/
+	/*这里设置100%，就是相对于离它最近的开启了定位的祖先元素而言的，也就是header-wrapper*/
+	width: 100%;
+	background-color: white;
+	position: absolute;
+	top: 100px;
+	left: 0;
+	/*先不设置border和shadow，不然使用hieght=0无法隐藏*/
+	/*border-top: 1px solid rgb(224,224,224);
+	box-shadow: 0 5px 3px rgba(0,0,0,.1);*/
+	/*隐藏这个元素*/
+	height: 0;
+	overflow: hidden;
+	/*为高度设置过渡效果*/
+	transition: height 1s;
+	/*这个下拉框的层级低于下载app的下拉框的层级*/
+	z-index: 9;
+}
+
+/*只给中间的几个li添加hover时的下拉框*/
+.nav .show-goods:hover ~ .goods-info,
+.goods-info:hover {
+	/*不仅需要给li绑定hover，还需要给弹出层自身绑定hover，否则在当鼠标离开了li后，弹出层就消失了*/
+	height: 228px;
+	border-top: 1px solid rgb(224,224,224);
+	box-shadow: 0 5px 3px rgba(0,0,0,.1);
+}
+
+
+/*
+右侧搜索栏
+*/
+.search-wrapper {
+	width: 296px;
+	height: 50px;
+	/*background-color:red;*/
+	float: right;
+	margin-top: 25px;
+}
+.search-wrapper .search-inp,
+.search-wrapper .search-button {
+	/*令两个表单元素浮动，从而去除由于html中书写存在的空格导致的间距问题*/
+	float: left;
+	height: 50px;
+	/*去除表单元素的默认属性*/
+	padding: 0;
+	border: none;	
+}
+.search-wrapper .search-inp {
+	/*将其设置为border-box,即宽度和高度包含了内边距和内容区*/
+	box-sizing: border-box;
+	width: 244px;
+	height: 50px;
+	/*设置input内部的文字缩进*/
+	text-indent: 10px;
+	font-size: 16px;
+	color: #757575;
+	border:solid 1px rgb(224,224,224);
+	/*去除轮廓线，否则当点击该input元素时，外围会出现一个不好看的框，比border小*/
+	outline: none;
+}
+.search-wrapper .search-button {
+	width: 52px;
+	background-color: white;
+	font-size: 18px;
+	color: #616161;
+	/*只添加三边的框，因为左边的框上面的text类型的input已经添加了*/
+	border: solid 1px rgb(224,224,224);
+	border-left: none;
+	outline: none;
+}
+.search-wrapper .search-button:hover {
+	background-color: #FF6700;
+	color: white;
+	border: none;
+}
+
+.search-wrapper:hover .search-inp,
+.search-wrapper:hover .search-button {
+	border-color: #B9B9B9;
+}
+
+/*设置获取焦点后的样式*/
+.search-wrapper .search-inp:focus,
+.search-wrapper .search-inp:focus + .search-button{
+	border-color: #FF6700;
+}
+
+/*
+设置左侧导航条的样式
+ */
+.all-goods-wrapper {
+	position: relative;
+	/*background-color: red;*/
+}
+.left-menu {
+	height: 420px;
+	width: 234px;
+	background-color: rgba(0,0,0,.6);
+	position: absolute;
+	z-index: 9;
+	left: -120px;
+	line-height: 1;
+	padding: 20px 0;
+}
+.left-menu li a {
+	display: block;
+	/*width: 100%;*/
+	height: 42px;
+	line-height: 42px;
+	color: white;
+	padding: 0 30px;
+	margin: 0;
+	font-size: 14px;
+}
+.left-menu li a i {
+	float: right;
+	line-height: 42px;
+}
+.left-menu li a:hover {
+	color: white;
+	background-color: #FF6700;
+}
+
+/*
+banner部分的样式
+*/
+.banner {
+	position: relative;
+	height: 460px;
+}
+.banner img {
+	width: 100%;
+	vertical-align: top;
+}
+.banner .img-list li{
+	/*令所有li脱离文档流，从而所有的图片盖起来了*/
+	position: absolute;
+}
+
+/*下边的pointer超链接部分设置*/
+.pointer{
+	position: absolute;
+	bottom: 22px;
+	right: 35px;
+}
+.pointer a{
+	display: block;
+	float: left;
+	width: 6px;
+	height: 6px;
+	background-color: rgba(0,0,0,0.4);
+	border: 2px solid rgba(255,255,255,0.4);
+	border-radius: 50%;
+	margin-right: 10px;
+}
+.pointer a:hover,
+.pointer a.active {
+	border-color: rgba(0,0,0,0.4);
+	background-color: rgba(255,255,255,0.4);
+}
+/*左右的箭头设置*/
+.prev-next a {
+	display:block;
+	width: 41px;
+	height: 69px;
+	/*background-color: red;*/
+	position: absolute;
+	background-image: url(../img/prev-next.png);
+}
+.prev {
+	top: 196px;
+	left: 234px;
+	background-position: -84px 0;
+}
+.next {
+	top: 196px;
+	right: 0;
+	background-position: -123px 0;
+}
+.prev:hover {
+	background-position: 0 0;
+}
+.next:hover {
+	background-position: -42px 0;
+}
+
+/*
+设置右侧工具条
+ */
+.back-top {
+	width: 26px;
+	height: 206px;
+	background-color: orange;
+	/*偏移量针对于视口而言*/
+	position: fixed;
+	bottom: 60px;
+	/*
+	等式：left+margin-left+border-left+padding-left+width+padding-right+border-right+margin-right+right
+	当等式不满足时，默认调整auto的值
+	默认left和right为auto,现在我们将right制定值，那么就会默认调整left的宽度保证等式满足
+	auto +0 +0 +0 + 26 + 0 + 0 + 0 + 50% + (-639) = 视口宽度 
+	当视口最大：1366px,得到50% = 683px,则left = 1296px
+	打开浏览器可以发现吻合
+	 */
+	/*这样元素就会在整个视口距离下边60px的水平位置处居中*/
+	right: 50%;   /*视口宽度的50%*/
+	/*然后调整右边距*/
+	margin-right: -639px;
+}
+
+/*
+设置中间的广告栏
+ */
+.ad {
+	height: 170px;
+	margin-top: 14px;
+	/*background-color: red;*/
+}
+.ad .shortcut,
+.ad .ad-img,
+.ad li {
+	float: left;
+}
+.ad .shortcut {
+	width: 234px;
+	height: 170px;
+	background-color: #5f5750;
+	margin-right: 14px;
+}
+.ad .ad-img li {
+	width: 316px;
+	margin-right: 15px;
+}
+.ad .ad-img li img {
+	width: 100%;
+	vertical-align: top;
+}
+.ad .ad-img li:last-child {
+	/*去除最后一个li的右外边距，否则宽度超出了w,从而内容会下移*/
+	margin-right: 0;
+}
+
+/*调整广告栏左侧元素的内部配置*/
+.shortcut li {
+	width: 76px;
+	height: 84px;
+	/*border: 1px solid red;*/
+	position: relative;
+	margin-top: 2px;
+	margin-left: 2px;
+}
+.shortcut li a{
+	color: #cfccca;
+	display: block;
+	padding-top: 18px;
+	font-size: 12px;
+	text-align: center;
+}
+.shortcut li a i {
+	display: block;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+.shortcut li a:hover {
+	color: white;
+}
+.shortcut li:before {
+	content:'';
+	position: absolute;
+	width: 64px;
+	height: 1px;
+	background-color: #665e57;
+	right: 0;
+	left: 0;
+	margin: 0 auto;
+}
+
+.shortcut li:after {
+	content:'';
+	position: absolute;
+	width: 1px;
+	height: 70px;
+	background-color: #665e57;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+=======
+/*这个是我们主页index.html的样式表*/
+/*顶部导航条的容器*/
+.topbar-wrapper {
+	width: 100%;
+	background-color: #333;
+	/* 直接将高度定死，可以减少很多问题，设置高度等于行高，实现其内元素的垂直居中 */
+	line-height: 40px;
+	height: 40px;
+}
+.service,.topbar li {
+	float: left;
+}
+.shopcar,.user_info {
+	float: right;
+}
+/*设置超链接的颜色*/
+.topbar a{
+	color: #b0b0b0;
+	font-size: 12px;
+	/*因为在原版的页面中，当我们将鼠标放置在文字以外的部分时，也会有hover的效果,所以应该将其设置为块元素*/
+	display: block;
+}
+/*设置超链接移入的效果*/
+.topbar a:hover {
+	color: white;
+}
+/*设置中间的分割线*/
+.topbar .line {
+	color: #424242;
+	font-size: 12px;
+	margin: 0 8px;
+}
+/*设置购物车的样式*/
+.shopcar {
+	margin-left: 25px;
+}
+.shopcar a{
+	width: 120px;
+	background-color: #424242;
+	/*内容水平居中处理*/
+	text-align: center;
+}
+.shopcar i {
+	margin-right: 3px;
+}
+/*这里的hover必须绑定给整个ul,因为这里有一个下拉框，需要保证在鼠标移动到下拉框中时，a也保持相同的Hover状态*/
+.shopcar:hover a{
+	color: #FF5B00;
+	background-color: white;
+}
+
+/*
+做下载APP的下拉框
+*/
+.service .qrcode {
+	/*设置整个下拉框的高度和宽度，背景颜色以及阴影*/
+	width: 124px;
+	/*height: 148px;*/
+	background-color: white;
+	box-shadow: 0 0 7px rgba(0, 0, 0, .2);
+	/*此时由于div块是导航栏的子元素，所以具有line-height=40px(文字部分),
+	这时div块所有元素相加的高度(img)90+(margin-top)18+(margin-bottom)12+(文字)40=170px>148px,
+	所以会导致span内的文字超出整个div块，就需要调整行高,设置为1表示是字体大小的1倍*/
+	line-height: 1; 
+	text-align: center;
+	/*因为整个下拉框在出现时不会对页面内的其他元素产生影响(不会撑开)，所以需要
+	令其脱离文档流*/
+	position: absolute;
+	/*调整整个框的位置处于a的正下方*/
+	left: -30px;
+	/* 设置其的文档层次，大一些，因为它基本上不会被其它元素覆盖住，除非在这个div块中的元素也具备类似的下拉框 */
+	z-index: 99;
+	/*设置其在打开界面时不可见，只有当整个导航选项处于hover状态时再出现*/
+	/* 方法1：display: none;*/
+	/* 因为这里要设置过渡效果，所以使用第二种方法，令其高度为0，设置溢出内容隐藏 */
+	height: 0;
+	overflow: hidden;
+	/* 设置其高度增大的过渡效果：0.3秒高度从0增加到指定高度，指定高度在hover部分 */
+	transition: height 0.3s;
+}
+.service .qrcode img{
+	width: 90px;
+	height:90px;
+	margin: 18px 17px 12px;
+}
+.qrcode span {
+	/*  设置文字的颜色 */
+	color: #000;
+}
+.qrcode_outer {
+	/*  将宽度定死，这样在处于hover状态，较大宽度的二维码出现时，就不会撑大整个导航选项 */
+	width: 60px;
+	/* 为了调整下拉框及小三角的位置设置的 */
+	position: relative;
+}
+/* 令下拉框在整个导航选项处于hover状态时出现 */
+.qrcode_outer:hover .qrcode{
+	/*  设置其过渡效果的最终高度 */
+	height: 148px;
+}
+.qrcode_outer:hover a::after{
+ 	/* 令小三角在整个导航选项处于hover状态时出现 */
+	display: block;
+}
+
+/*
+添加APP下拉框的小三角
+*/
+.qrcode_outer a::after {
+	/* 内容设置为空，直接将其设置为一个块元素，宽度和高度均设置为0，然后利用边框产生小三角 */
+	content: '';
+	display: block;
+	width: 0;
+	height: 0;
+	/* 先令边框均为透明颜色，因为我们只需要显示下边框的部分，所以我们将下边框的颜色设置出来，上边框
+	可以去掉也可以存在，因为它的颜色是透明的，左右边框不能去掉，保持透明即可 */
+	border: 7px solid transparent;
+	border-top: none;
+	border-bottom-color: #fff;
+	/* 开启定位，调整位置 */
+	position: absolute;
+	/* 调整小三角的水平居中，那九个值加起来不满足等式，则自动调整值为auto的部分*/
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	/* 设置其在打开界面时不可见，只有当整个导航选项处于hover状态时再出现 */
+	display: none;
+}
+
+/* 
+设置购物车部分的下拉框 
+*/
+.shopcar {
+	position: relative;
+}
+.shopcar .user_buy {
+	width: 316px;
+	height: 0;
+	overflow: hidden;
+	/*阴影默认和元素大小一致，并且阴影正好被元素覆盖了，0表示阴影相对于元素的水平偏移量，8px是垂直偏移量，10px是阴影的模糊半径
+	因为原网页中，上面没有阴影，所以垂直偏移量为8px*/
+	box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+	/* 令其脱离文档流，不影响其他元素的布局 */
+	position: absolute;
+	top: 40px;
+	right: 0;
+	text-align: center;
+	z-index: 99;
+	background-color: white;
+	transition: height 0.3s;
+}
+.user_buy div {
+	/* 设置居中处理 */
+	margin-top: 31px;
+	font-size: 12px;
+	color: #424242;
+}
+.shopcar:hover .user_buy{
+	height: 102px;
+}
+
+
+
+/*
+设置中间的header
+ */
+.header-wrapper {
+	position: relative;
+	/*background-color:red;*/
+}
+.header {
+	height: 100px;
+	/*background-color:#bfa;*/
+}
+.header .logo {
+	float: left;
+	margin-top: 22.5px;
+	height: 55px;
+	width: 55px;
+	position: relative;
+	/*直接将logo的宽度和高度定为超链接的高度和宽度，然后令其溢出部分隐藏，从而使得每一次只能显示一个超链接*/
+	overflow: hidden;
+	/*隐藏logo中的文字，一般logo中的文字是给浏览器看的*/
+	text-indent: -9999px;
+}
+/*统一设置logo的超链接*/
+.header .logo a {
+	/*display: block; 由于后面有需要，为其开启了定位，所以block就不需要了*/
+	position: absolute;
+	height: 55px;
+	width: 55px;
+	background-color:#ff6700;
+	/*让a垂直居中*/
+	background-image:url(../img/mi-logo.png);
+	/*背景居中*/
+	background-position:center;
+	/*这里需要设置left:0,因为过渡效果需要从有效值到另一个有效值*/
+	left: 0;
+	transition: left 0.3s;
+}
+.header .logo .home {
+	/*设置第一个超链接的背景图片*/
+	background-image: url(../img/home.png);
+	/*这里的left值会直接替代对于所有logo中超链接的设置的left:0*/
+	left: -55px;
+}
+.header .logo:hover .mi{
+	left: 55px;
+}
+.header .logo:hover .home{
+	left: 0;
+}
+
+/*
+设置中间的导航条
+ */
+.header .nav-wrapper {
+	float: left;
+	margin-left: 7px;
+}
+.header .nav {
+	/*width: 792px;*/
+	height: 100px;
+	/*background-color: pink;*/
+	line-height: 100px;
+	padding-left: 58px;
+}
+/* 设置导航条中的列表项*/
+.nav-wrapper .nav>li {
+	float: left;
+}
+.nav-wrapper li a {
+	display: block;
+	font-size: 16px;
+	margin-right: 20px;
+}
+.all-goods {
+	/*将这一部分隐藏，但是仍然占据页面位置*/
+	visibility:hidden;
+}
+.nav-wrapper li a:hover{
+	color: #ff6700;
+}
+
+/*设置弹出层*/
+.nav .goods-info {
+	/*height: 228px;*/
+	/*这里设置100%，就是相对于离它最近的开启了定位的祖先元素而言的，也就是header-wrapper*/
+	width: 100%;
+	background-color: white;
+	position: absolute;
+	top: 100px;
+	left: 0;
+	/*先不设置border和shadow，不然使用hieght=0无法隐藏*/
+	/*border-top: 1px solid rgb(224,224,224);
+	box-shadow: 0 5px 3px rgba(0,0,0,.1);*/
+	/*隐藏这个元素*/
+	height: 0;
+	overflow: hidden;
+	/*为高度设置过渡效果*/
+	transition: height 1s;
+	/*这个下拉框的层级低于下载app的下拉框的层级*/
+	z-index: 9;
+}
+
+/*只给中间的几个li添加hover时的下拉框*/
+.nav .show-goods:hover ~ .goods-info,
+.goods-info:hover {
+	/*不仅需要给li绑定hover，还需要给弹出层自身绑定hover，否则在当鼠标离开了li后，弹出层就消失了*/
+	height: 228px;
+	border-top: 1px solid rgb(224,224,224);
+	box-shadow: 0 5px 3px rgba(0,0,0,.1);
+}
+
+
+/*
+右侧搜索栏
+*/
+.search-wrapper {
+	width: 296px;
+	height: 50px;
+	/*background-color:red;*/
+	float: right;
+	margin-top: 25px;
+}
+.search-wrapper .search-inp,
+.search-wrapper .search-button {
+	/*令两个表单元素浮动，从而去除由于html中书写存在的空格导致的间距问题*/
+	float: left;
+	height: 50px;
+	/*去除表单元素的默认属性*/
+	padding: 0;
+	border: none;	
+}
+.search-wrapper .search-inp {
+	/*将其设置为border-box,即宽度和高度包含了内边距和内容区*/
+	box-sizing: border-box;
+	width: 244px;
+	height: 50px;
+	/*设置input内部的文字缩进*/
+	text-indent: 10px;
+	font-size: 16px;
+	color: #757575;
+	border:solid 1px rgb(224,224,224);
+	/*去除轮廓线，否则当点击该input元素时，外围会出现一个不好看的框，比border小*/
+	outline: none;
+}
+.search-wrapper .search-button {
+	width: 52px;
+	background-color: white;
+	font-size: 18px;
+	color: #616161;
+	/*只添加三边的框，因为左边的框上面的text类型的input已经添加了*/
+	border: solid 1px rgb(224,224,224);
+	border-left: none;
+	outline: none;
+}
+.search-wrapper .search-button:hover {
+	background-color: #FF6700;
+	color: white;
+	border: none;
+}
+
+.search-wrapper:hover .search-inp,
+.search-wrapper:hover .search-button {
+	border-color: #B9B9B9;
+}
+
+/*设置获取焦点后的样式*/
+.search-wrapper .search-inp:focus,
+.search-wrapper .search-inp:focus + .search-button{
+	border-color: #FF6700;
+}
+
+/*
+设置左侧导航条的样式
+ */
+.all-goods-wrapper {
+	position: relative;
+	/*background-color: red;*/
+}
+.left-menu {
+	height: 420px;
+	width: 234px;
+	background-color: rgba(0,0,0,.6);
+	position: absolute;
+	z-index: 9;
+	left: -120px;
+	line-height: 1;
+	padding: 20px 0;
+}
+.left-menu li a {
+	display: block;
+	/*width: 100%;*/
+	height: 42px;
+	line-height: 42px;
+	color: white;
+	padding: 0 30px;
+	margin: 0;
+	font-size: 14px;
+}
+.left-menu li a i {
+	float: right;
+	line-height: 42px;
+}
+.left-menu li a:hover {
+	color: white;
+	background-color: #FF6700;
+}
+
+/*
+banner部分的样式
+*/
+.banner {
+	position: relative;
+	height: 460px;
+}
+.banner img {
+	width: 100%;
+	vertical-align: top;
+}
+.banner .img-list li{
+	/*令所有li脱离文档流，从而所有的图片盖起来了*/
+	position: absolute;
+}
+
+/*下边的pointer超链接部分设置*/
+.pointer{
+	position: absolute;
+	bottom: 22px;
+	right: 35px;
+}
+.pointer a{
+	display: block;
+	float: left;
+	width: 6px;
+	height: 6px;
+	background-color: rgba(0,0,0,0.4);
+	border: 2px solid rgba(255,255,255,0.4);
+	border-radius: 50%;
+	margin-right: 10px;
+}
+.pointer a:hover,
+.pointer a.active {
+	border-color: rgba(0,0,0,0.4);
+	background-color: rgba(255,255,255,0.4);
+}
+/*左右的箭头设置*/
+.prev-next a {
+	display:block;
+	width: 41px;
+	height: 69px;
+	/*background-color: red;*/
+	position: absolute;
+	background-image: url(../img/prev-next.png);
+}
+.prev {
+	top: 196px;
+	left: 234px;
+	background-position: -84px 0;
+}
+.next {
+	top: 196px;
+	right: 0;
+	background-position: -123px 0;
+}
+.prev:hover {
+	background-position: 0 0;
+}
+.next:hover {
+	background-position: -42px 0;
+}
+
+/*
+设置右侧工具条
+ */
+.back-top {
+	width: 26px;
+	height: 206px;
+	background-color: orange;
+	/*偏移量针对于视口而言*/
+	position: fixed;
+	bottom: 60px;
+	/*
+	等式：left+margin-left+border-left+padding-left+width+padding-right+border-right+margin-right+right
+	当等式不满足时，默认调整auto的值
+	默认left和right为auto,现在我们将right制定值，那么就会默认调整left的宽度保证等式满足
+	auto +0 +0 +0 + 26 + 0 + 0 + 0 + 50% + (-639) = 视口宽度 
+	当视口最大：1366px,得到50% = 683px,则left = 1296px
+	打开浏览器可以发现吻合
+	 */
+	/*这样元素就会在整个视口距离下边60px的水平位置处居中*/
+	right: 50%;   /*视口宽度的50%*/
+	/*然后调整右边距*/
+	margin-right: -639px;
+}
+
+/*
+设置中间的广告栏
+ */
+.ad {
+	height: 170px;
+	margin-top: 14px;
+	/*background-color: red;*/
+}
+.ad .shortcut,
+.ad .ad-img,
+.ad li {
+	float: left;
+}
+.ad .shortcut {
+	width: 234px;
+	height: 170px;
+	background-color: #5f5750;
+	margin-right: 14px;
+}
+.ad .ad-img li {
+	width: 316px;
+	margin-right: 15px;
+}
+.ad .ad-img li img {
+	width: 100%;
+	vertical-align: top;
+}
+.ad .ad-img li:last-child {
+	/*去除最后一个li的右外边距，否则宽度超出了w,从而内容会下移*/
+	margin-right: 0;
+}
+
+/*调整广告栏左侧元素的内部配置*/
+.shortcut li {
+	width: 76px;
+	height: 84px;
+	/*border: 1px solid red;*/
+	position: relative;
+	margin-top: 2px;
+	margin-left: 2px;
+}
+.shortcut li a{
+	color: #cfccca;
+	display: block;
+	padding-top: 18px;
+	font-size: 12px;
+	text-align: center;
+}
+.shortcut li a i {
+	display: block;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+.shortcut li a:hover {
+	color: white;
+}
+.shortcut li:before {
+	content:'';
+	position: absolute;
+	width: 64px;
+	height: 1px;
+	background-color: #665e57;
+	right: 0;
+	left: 0;
+	margin: 0 auto;
+}
+
+.shortcut li:after {
+	content:'';
+	position: absolute;
+	width: 1px;
+	height: 70px;
+	background-color: #665e57;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+>>>>>>> b19e42900c2100ba0803e2a30345f54cb49f68fe
+}
